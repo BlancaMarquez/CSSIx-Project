@@ -19,12 +19,15 @@ import jinja2
 import os
 import logging
 
-jinja_environment = jinja2_Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
+jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Hello world!')
-
+class SecondHandler(webapp2.RequestHandler):
+    def get(self):
+class ThirdHandler(webapp2.RequestHandler):
+    def get(self):
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
 ], debug=True)
