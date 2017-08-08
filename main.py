@@ -25,9 +25,10 @@ jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.di
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        template = jinja_environment.get_template('templates/sign-in.html')
+        template = jinja_environment.get_template('templates/frontpage.html')
         self.response.write(template.render())
-        self.response.write('Hello world!')
+    def post(self):
+        
 class SecondHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/sign-in.html')
