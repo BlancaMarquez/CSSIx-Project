@@ -32,8 +32,10 @@ class SecondHandler(webapp2.RequestHandler):
     def get(self):
         r_template = jinja_environment.get_template('templates/sign-in.html')
         self.response.write(r_template.render())
-# class ThirdHandler(webapp2.RequestHandler):
-#     def get(self):
+class ThirdHandler(webapp2.RequestHandler):
+    def get(self):
+        s_template = jinja_environment.get_template('templates/secondpage.html')
+        self.response.write(s_template.render())
 # class FourthHandler(webapp2.RequestHandler):
 #     def get(self):
 #         # change the template html
@@ -55,5 +57,6 @@ class SecondHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/sign-in', SecondHandler)
+    ('/sign-in', SecondHandler),
+    ('/secondpage', ThirdHandler)
 ], debug=True)
