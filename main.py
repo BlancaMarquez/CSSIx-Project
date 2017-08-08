@@ -19,6 +19,7 @@ import jinja2
 import os
 import logging
 
+from person import Person
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
@@ -35,6 +36,22 @@ class ThirdHandler(webapp2.RequestHandler):
     def get(self):
 class FourthHandler(webapp2.RequestHandler):
     def get(self):
+        # change the template html
+        main_template = jinja_environment.get_template('templates/sign-in.html')
+        self.response.write(main_template.render())
+    def post(self):
+        p_email = self.request.get('personemail')
+        p_pass = self.request.get('personpass')
+
+        my_person = Person(email = p_email, password = p_p_pass)
+
+        person_key = my_person()
+        logging.info(person_key.get().name)
+
+        results_template = jinja_environment.get_template('templates/results.html')
+        self.response.write(results_template.render())
+
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
