@@ -27,12 +27,11 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/frontpage.html')
         self.response.write(template.render())
-#     def post(self):
-#
-# class SecondHandler(webapp2.RequestHandler):
-#     def get(self):
-#         template = jinja_environment.get_template('templates/sign-in.html')
-#         self.response.write(template.render())
+
+class SecondHandler(webapp2.RequestHandler):
+    def get(self):
+        r_template = jinja_environment.get_template('templates/sign-in.html')
+        self.response.write(r_template.render())
 # class ThirdHandler(webapp2.RequestHandler):
 #     def get(self):
 # class FourthHandler(webapp2.RequestHandler):
@@ -55,5 +54,6 @@ class MainHandler(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/sign-in', SecondHandler)
 ], debug=True)
