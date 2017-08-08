@@ -28,6 +28,8 @@ class SecondHandler(webapp2.RequestHandler):
     def get(self):
 class ThirdHandler(webapp2.RequestHandler):
     def get(self):
+class FourthHandler(webapp2.RequestHandler):
+    def get(self):
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
 ], debug=True)
