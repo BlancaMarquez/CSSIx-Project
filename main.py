@@ -40,8 +40,9 @@ class ThirdHandler(webapp2.RequestHandler):
     def post(self):
         p_email = self.request.get('emails')
         p_pass = self.request.get('psw')
+        p_repass = self.request.get('psw-repeat')
 
-        my_person = Person(email = p_email, password = p_pass)
+        my_person = Person(email = p_email, password = p_pass, repassword = p_repass)
 
         person_key = my_person.put()
         logging.info(person_key.get().email)
