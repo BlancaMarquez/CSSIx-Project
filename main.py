@@ -64,7 +64,7 @@ class FifthHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/sign-in', SecondHandler),
-    ('/secondpage', ThirdHandler),
+    ('/signup', ThirdHandler),
     ('/success', FourthHandler),
     ('/main-page', FifthHandler)
 
