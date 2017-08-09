@@ -19,7 +19,7 @@ import jinja2
 import os
 import logging
 
-# from person import Person
+from person import Person
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
@@ -32,31 +32,36 @@ class SecondHandler(webapp2.RequestHandler):
     def get(self):
         r_template = jinja_environment.get_template('templates/sign-in.html')
         self.response.write(r_template.render())
+
 class ThirdHandler(webapp2.RequestHandler):
     def get(self):
         s_template = jinja_environment.get_template('templates/secondpage.html')
         self.response.write(s_template.render())
-# class FourthHandler(webapp2.RequestHandler):
-#     def get(self):
-#         # change the template html
-#         main_template = jinja_environment.get_template('templates/sign-in.html')
-#         self.response.write(main_template.render())
-#     def post(self):
-#         p_email = self.request.get('personemail')
-#         p_pass = self.request.get('personpass')
-#
-#         my_person = Person(email = p_email, password = p_p_pass)
-#
-#         person_key = my_person()
-#         logging.info(person_key.get().name)
-#
-#         results_template = jinja_environment.get_template('templates/results.html')
-#         self.response.write(results_template.render())
+    def post(self):
+        p_email = self.request.get('emails')
+        p_pass = self.request.get('psw')
+
+        my_person = Person(email = p_email, password = p_pass)
+
+        person_key = my_person.put()
+        logging.info(person_key.get().email)
+
+        # results_template = jinja_environment.get_template('templates/.html')
+        # self.response.write(results_template.render())
+class FourthHandler(self):
+    def get(self):
+
+class FifthHandler(webapp2.RequestHandler):
+    def get(self):
+        m_template = jinja_environment.get_template('templates/main-page.html')
+        self.response.write(m_template.render())
+
 
 
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/sign-in', SecondHandler),
-    ('/secondpage', ThirdHandler)
+    ('/secondpage', ThirdHandler),
+    ('/main-page', FourthHandler)
 ], debug=True)
