@@ -18,6 +18,7 @@ import webapp2
 import jinja2
 import os
 import logging
+import google.appengine.api import ndb
 
 from person import Person
 
@@ -30,6 +31,9 @@ class MainHandler(webapp2.RequestHandler):
 
 class SecondHandler(webapp2.RequestHandler):
     def get(self):
+        user = ndb.get_current_user()
+        
+
         r_template = jinja_environment.get_template('templates/sign-in.html')
         self.response.write(r_template.render())
 
