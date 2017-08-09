@@ -18,7 +18,7 @@ import webapp2
 import jinja2
 import os
 import logging
-from google.appengine.ext import ndb
+from google.appengine.api import users
 
 from person import Person
 
@@ -31,23 +31,33 @@ class MainHandler(webapp2.RequestHandler):
 
 class SecondHandler(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
+        login_url = users.create_login_url(self.request.path)
+        logout_url = users.create_logout_url(self.request.path)
+
+        context = {
+            'user': user,
+            'login_url': login_url,
+            'logout_url': logout_url
+        }
+
         r_template = jinja_environment.get_template('templates/sign-in.html')
         self.response.write(r_template.render())
 
-class ThirdHandler(webapp2.RequestHandler):
-    def get(self):
-        s_template = jinja_environment.get_template('templates/signup.html')
-        self.response.write(s_template.render())
-    def post(self):
-        p_email = self.request.get('emails')
-        p_pass = self.request.get('psw')
-        p_repass = self.request.get('psw-repeat')
-
-        my_person = Person(email = p_email, password = p_pass, repassword = p_repass)
-
-        person_key = my_person.put()
-        logging.info(person_key.get().email)
-
+# class ThirdHandler(webapp2.RequestHandler):
+#     def get(self):
+#         s_template = jinja_environment.get_template('templates/signup.html')
+#         self.response.write(s_template.render())
+#     def post(self):
+#         p_email = self.request.get('emails')
+#         p_pass = self.request.get('psw')
+#         p_repass = self.request.get('psw-repeat')
+#
+#         my_person = Person(email = p_email, password = p_pass, repassword = p_repass)
+#
+#         person_key = my_person.put()
+#         logging.info(person_key.get().email)
+#
         # results_template = jinja_environment.get_template('templates/.html')
         # self.response.write(results_template.render())
 class FourthHandler(webapp2.RequestHandler):
@@ -73,7 +83,7 @@ class FifthHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/sign-in', SecondHandler),
-    ('/signup', ThirdHandler),
+    # ('/signup', ThirdHandler),
     ('/success', FourthHandler),
     ('/main-page', FifthHandler)
 
