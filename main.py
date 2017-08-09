@@ -35,7 +35,7 @@ class SecondHandler(webapp2.RequestHandler):
 
 class ThirdHandler(webapp2.RequestHandler):
     def get(self):
-        s_template = jinja_environment.get_template('templates/secondpage.html')
+        s_template = jinja_environment.get_template('templates/signup.html')
         self.response.write(s_template.render())
     def post(self):
         p_email = self.request.get('emails')
@@ -64,7 +64,7 @@ class FifthHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/sign-in', SecondHandler),
-    ('/secondpage', ThirdHandler),
+    ('/signup', ThirdHandler),
     ('/success', FourthHandler),
     ('/main-page', FifthHandler)
 
