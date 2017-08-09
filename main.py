@@ -18,6 +18,7 @@ import webapp2
 import jinja2
 import os
 import logging
+from google.appengine.ext import ndb
 
 from person import Person
 
@@ -54,8 +55,15 @@ class FourthHandler(webapp2.RequestHandler):
         t_template = jinja_environment.get_template('templates/success.html')
         self.response.write(t_template.render())
 
+class MainPage(ndb.Model):
+
 class FifthHandler(webapp2.RequestHandler):
     def get(self):
+        user_name = self.request.get('user_name')
+        user_pass = int(self.request.get('pass_word'))
+
+        existing_user_query =
+
         m_template = jinja_environment.get_template('templates/main-page.html')
         self.response.write(m_template.render())
 
