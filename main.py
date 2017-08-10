@@ -18,6 +18,7 @@ import webapp2
 import jinja2
 import os
 import logging
+import time
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -27,7 +28,19 @@ class Street(ndb.Model):
      street = ndb.StringProperty(required=True)
      time = ndb.StringProperty(required=True)
 
-jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
+# class CoordsRequest(ndb.Model):
+#     lat = ndb.StringProperty(required = True)
+#     lon = ndb.StringProperty(required = True)
+#     timestamp = ndb.DateTimeProperty(auto_now_add = True)
+#
+# class AddressRequest(ndb.Model):
+#     address = ndb.StringProperty(required = True)
+#     timestamp = ndb.DateTimeProperty(auto_now_add = True)
+
+jinja_environment = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -55,24 +68,28 @@ class SecondHandler(webapp2.RequestHandler):
         if
         my_neigh = Street(street=street_name, time= time_lapse)
         neigh_key = my_neigh.put()
-        logging.info(neigh_key.get().street)
 
-# class ThirdHandler(webapp2.RequestHandler):
-#     def get(self):
-#         s_template = jinja_environment.get_template('templates/signup.html')
-#         self.response.write(s_template.render())
+        stuff = {
+            'street_name' : street_name
+        }
+
+        logging.info(neigh_key.get().street)
+        r_template = jinja_environment.get_template('templates/map-page.html')
+        self.response.write(r_template.render(stuff))
+
+# class RecordRequestHandler(webapp2.RequestHandler):
 #     def post(self):
-#         p_email = self.request.get('emails')
-#         p_pass = self.request.get('psw')
-#         p_repass = self.request.get('psw-repeat')
-#
-#         my_person = Person(email = p_email, password = p_pass, repassword = p_repass)
-#
-#         person_key = my_person.put()
-#         logging.info(person_key.get().email)
-#
-        # results_template = jinja_environment.get_template('templates/.html')
-        # self.response.write(results_template.render())
+#         logging.info(self.request)
+#         if self.request.get('type') == "coords":
+#             new_record = CoordsRequest(lat = self.request.get('lat'),
+#                                        lon = self.request.get('lon'))
+#             new_record.put()
+#         elif self.request.get('type') == "address":
+#             new_address_record = AddressRequest(address = self.request.get('address'))
+#             new_address_record.put()
+#         else:
+#             logging.error("Malformed Request!")
+
 # class FourthHandler(webapp2.RequestHandler):
 #     def get(self):
 #         t_template = jinja_environment.get_template('templates/success.html')
