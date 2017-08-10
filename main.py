@@ -67,13 +67,17 @@ class FourthHandler(webapp2.RequestHandler):
         self.response.write(t_template.render())
 
 class MainPage(ndb.Model):
+    name = ndb.StringProperty(required=True)
+    word = ndb.StringProperty(required=True)
 
 class FifthHandler(webapp2.RequestHandler):
     def get(self):
         user_name = self.request.get('user_name')
-        user_pass = int(self.request.get('pass_word'))
+        user_word = int(self.request.get('pass_word'))
 
-        existing_user_query =
+        existing_user_query = MainPage.query(MainPage.name == user_name)
+        existing_user = existing_user_query.get()
+        
 
         m_template = jinja_environment.get_template('templates/main-page.html')
         self.response.write(m_template.render())
