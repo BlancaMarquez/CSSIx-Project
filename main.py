@@ -19,28 +19,12 @@ import jinja2
 import os
 import logging
 from google.appengine.api import users
-from google.appengine.ext import ndb
 
 from person import Person
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 class MainHandler(webapp2.RequestHandler):
-    def get(self):
-        # user = users.get_current_user()
-        # login_url = users.create_login_url(self.request.path)
-        # logout_url = users.create_logout_url(self.request.path)
-        #
-        # context = {
-        #     'user': user,
-        #     'login_url': login_url,
-        #     'logout_url': logout_url
-        # }
-
-        template = jinja_environment.get_template('templates/frontpage.html')
-        self.response.write(template.render(context))
-
-class SecondHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         login_url = users.create_login_url(self.request.path)
@@ -52,9 +36,14 @@ class SecondHandler(webapp2.RequestHandler):
             'logout_url': logout_url
         }
 
-        r_template = jinja_environment.get_template('templates/main-page.html')
-        self.response.write(r_template.render())
+        template = jinja_environment.get_template('templates/frontpage.html')
+        self.response.write(template.render(context))
 
+# class SecondHandler(webapp2.RequestHandler):
+    # def get(self):
+    #     r_template = jinja_environment.get_template('templates/main-page.html')
+    #     self.response.write(r_template.render())
+#
 # class ThirdHandler(webapp2.RequestHandler):
 #     def get(self):
 #         s_template = jinja_environment.get_template('templates/signup.html')
