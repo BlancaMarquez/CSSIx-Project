@@ -22,9 +22,10 @@ from google.appengine.api import users
 from google.appengine.ext import ndb
 
 class Street(ndb.Model):
-     email = ndb.StringProperty(required=True)
-     password = ndb.StringProperty(required=True)
-     repassword = ndb.StringProperty(required=True)
+    #  first = ndb.StringProperty(require=True)
+    #  last = ndb.StringProperty(require=True)
+     street = ndb.StringProperty(required=True)
+     time = ndb.StringProperty(required=True)
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
@@ -49,8 +50,14 @@ class SecondHandler(webapp2.RequestHandler):
         self.response.write(r_template.render())
 
     def post(self):
-        street = self.request.get("street")
-        time = self.request.get("time")
+        street_name = self.request.get('street')
+        time_lapse = self.request.get('time')
+
+        my_neigh = Street(street=street_name, time= time_lapse)
+
+        neigh_key = my_neigh.put()
+
+        logging.info(neigh_key.get().street)
 
 # class ThirdHandler(webapp2.RequestHandler):
 #     def get(self):
