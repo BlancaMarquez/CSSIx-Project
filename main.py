@@ -48,6 +48,10 @@ class SecondHandler(webapp2.RequestHandler):
         r_template = jinja_environment.get_template('templates/main-page.html')
         self.response.write(r_template.render())
 
+    def post(self):
+        street = self.request.get("street")
+        time = self.request.get("time")
+
 # class ThirdHandler(webapp2.RequestHandler):
 #     def get(self):
 #         s_template = jinja_environment.get_template('templates/signup.html')
