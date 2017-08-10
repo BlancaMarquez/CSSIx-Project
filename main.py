@@ -23,19 +23,8 @@ from google.appengine.api import users
 from google.appengine.ext import ndb
 
 class Street(ndb.Model):
-    #  first = ndb.StringProperty(require=True)
-    #  last = ndb.StringProperty(require=True)
      street = ndb.StringProperty(required=True)
      time = ndb.StringProperty(required=True)
-
-# class CoordsRequest(ndb.Model):
-#     lat = ndb.StringProperty(required = True)
-#     lon = ndb.StringProperty(required = True)
-#     timestamp = ndb.DateTimeProperty(auto_now_add = True)
-#
-# class AddressRequest(ndb.Model):
-#     address = ndb.StringProperty(required = True)
-#     timestamp = ndb.DateTimeProperty(auto_now_add = True)
 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -65,7 +54,7 @@ class SecondHandler(webapp2.RequestHandler):
     def post(self):
         street_name = self.request.get('street')
         time_lapse = self.request.get('time')
-        
+
         my_neigh = Street(street=street_name, time= time_lapse)
         neigh_key = my_neigh.put()
 
