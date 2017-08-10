@@ -71,10 +71,10 @@ class SecondHandler(webapp2.RequestHandler):
 #
         # results_template = jinja_environment.get_template('templates/.html')
         # self.response.write(results_template.render())
-class FourthHandler(webapp2.RequestHandler):
-    def get(self):
-        t_template = jinja_environment.get_template('templates/success.html')
-        self.response.write(t_template.render())
+# class FourthHandler(webapp2.RequestHandler):
+#     def get(self):
+#         t_template = jinja_environment.get_template('templates/success.html')
+#         self.response.write(t_template.render())
 
 class MainPage(ndb.Model):
     name = ndb.StringProperty(required=True)
