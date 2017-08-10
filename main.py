@@ -65,9 +65,8 @@ class SecondHandler(webapp2.RequestHandler):
     def post(self):
         street_name = self.request.get('street')
         time_lapse = self.request.get('time')
-
+        if
         my_neigh = Street(street=street_name, time= time_lapse)
-
         neigh_key = my_neigh.put()
 
         stuff = {
