@@ -26,8 +26,18 @@ jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.di
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        # user = users.get_current_user()
+        # login_url = users.create_login_url(self.request.path)
+        # logout_url = users.create_logout_url(self.request.path)
+        #
+        # context = {
+        #     'user': user,
+        #     'login_url': login_url,
+        #     'logout_url': logout_url
+        # }
+
         template = jinja_environment.get_template('templates/frontpage.html')
-        self.response.write(template.render())
+        self.response.write(template.render(context))
 
 class SecondHandler(webapp2.RequestHandler):
     def get(self):
@@ -41,7 +51,7 @@ class SecondHandler(webapp2.RequestHandler):
             'logout_url': logout_url
         }
 
-        r_template = jinja_environment.get_template('templates/sign-in.html')
+        r_template = jinja_environment.get_template('templates/main-page.html')
         self.response.write(r_template.render())
 
 # class ThirdHandler(webapp2.RequestHandler):
@@ -60,20 +70,13 @@ class SecondHandler(webapp2.RequestHandler):
 #
         # results_template = jinja_environment.get_template('templates/.html')
         # self.response.write(results_template.render())
-class FourthHandler(webapp2.RequestHandler):
-    def get(self):
-        t_template = jinja_environment.get_template('templates/success.html')
-        self.response.write(t_template.render())
-
-class MainPage(ndb.Model):
-
+# class FourthHandler(webapp2.RequestHandler):
+#     def get(self):
+#         t_template = jinja_environment.get_template('templates/success.html')
+#         self.response.write(t_template.render())
+#
 class FifthHandler(webapp2.RequestHandler):
     def get(self):
-        user_name = self.request.get('user_name')
-        user_pass = int(self.request.get('pass_word'))
-
-        existing_user_query =
-
         m_template = jinja_environment.get_template('templates/main-page.html')
         self.response.write(m_template.render())
 
@@ -82,9 +85,9 @@ class FifthHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/sign-in', SecondHandler),
+    # ('/sign-in', SecondHandler),
     # ('/signup', ThirdHandler),
-    ('/success', FourthHandler),
+    # ('/success', FourthHandler),
     ('/main-page', FifthHandler)
 
 ], debug=True)

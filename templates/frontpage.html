@@ -11,6 +11,14 @@
       </p>
 
       <p style="font-size:22px;font-family:garamond"> Sign in with your email account!
+        {% if user %}
+      <p>Welcome, {{ user.email() }}</p>
+
+      <p>You can <a href="{{logout_url}}">sign out</a>.</p>
+
+    {% else %}
+      <a href="{{login_url}}">Sign in</a>
+    {% endif%}
         <!-- <button  type="button" onclick="window.location.href='/signup'">Sign me up!</button> -->
       </p>
 
