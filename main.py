@@ -27,8 +27,18 @@ jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.di
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        # user = users.get_current_user()
+        # login_url = users.create_login_url(self.request.path)
+        # logout_url = users.create_logout_url(self.request.path)
+        #
+        # context = {
+        #     'user': user,
+        #     'login_url': login_url,
+        #     'logout_url': logout_url
+        # }
+
         template = jinja_environment.get_template('templates/frontpage.html')
-        self.response.write(template.render())
+        self.response.write(template.render(context))
 
 class SecondHandler(webapp2.RequestHandler):
     def get(self):
@@ -42,7 +52,7 @@ class SecondHandler(webapp2.RequestHandler):
             'logout_url': logout_url
         }
 
-        r_template = jinja_environment.get_template('templates/sign-in.html')
+        r_template = jinja_environment.get_template('templates/main-page.html')
         self.response.write(r_template.render())
 
 # class ThirdHandler(webapp2.RequestHandler):
@@ -77,7 +87,7 @@ class FifthHandler(webapp2.RequestHandler):
 
         existing_user_query = MainPage.query(MainPage.name == user_name)
         existing_user = existing_user_query.get()
-        
+
 
         m_template = jinja_environment.get_template('templates/main-page.html')
         self.response.write(m_template.render())
@@ -87,9 +97,9 @@ class FifthHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/sign-in', SecondHandler),
+    # ('/sign-in', SecondHandler),
     # ('/signup', ThirdHandler),
-    ('/success', FourthHandler),
+    # ('/success', FourthHandler),
     ('/main-page', FifthHandler)
 
 ], debug=True)
