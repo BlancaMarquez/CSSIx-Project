@@ -12,6 +12,8 @@
 
 
         {% if user %}
+          <p style="font-family:garamond;font-size:23px"> Excellent choice on contributing toward your community by making the effort to keep a safe environment in your neighborhood. Please click the following button to start making a change! </p>
+          <button  type="button" onclick="window.location.href='/main-page'">Start</button>
           <p>You can <a href="{{logout_url}}">sign out</a>.</p>
         {% else %}
           <p style="font-size:22px;font-family:garamond"> Sign in with your email account!
