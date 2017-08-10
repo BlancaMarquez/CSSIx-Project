@@ -19,6 +19,7 @@ import jinja2
 import os
 import logging
 from google.appengine.api import users
+from google.appengine.ext import ndb
 
 from person import Person
 
