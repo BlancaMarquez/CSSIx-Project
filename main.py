@@ -21,7 +21,10 @@ import logging
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
-# from street import Street
+class Street(ndb.Model):
+     email = ndb.StringProperty(required=True)
+     password = ndb.StringProperty(required=True)
+     repassword = ndb.StringProperty(required=True)
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
