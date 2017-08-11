@@ -59,7 +59,8 @@ class SecondHandler(webapp2.RequestHandler):
         neigh_key = my_neigh.put()
 
         stuff = {
-            'street_name' : street_name
+            'street_name' : street_name,
+            'time_lapse' : time_lapse
         }
 
         logging.info(neigh_key.get().street)
